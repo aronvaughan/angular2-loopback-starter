@@ -1,0 +1,10 @@
+# production deploy config
+.idea
+bin
+gulp
+target
+test
+node_modules
+mongo-data
+
+

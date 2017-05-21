@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+#/ command: mongo:stop: "stop a mongo container"
+#/ usage: rerun mongo:stop [ --name <mongo>] 
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: NAME
+
+. $RERUN_MODULE_DIR/lib/functions.sh stop || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+
+#rerun stubbs:add-command --command stop --module mongo --description "stop a mongo container"
+#rerun stubbs:add-option --option name --export false --required false --default mongo --command stop --module mongo --description "the name for this conatiner instance"
+rerun_log info "mongo:stop: stopping mongo: $NAME"
+rerun docker:stop --name $NAME
+# Done. Exit with last command exit status.
+exit $?
+

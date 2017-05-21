@@ -1,0 +1,23 @@
+{
+  "name": "Health",
+  "base": "PersistedModel",
+  "idInjection": true,
+    "mixins": {
+        "Uuid": {
+        },
+        "TimeStamp" : true
+    },
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "dbCheck": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

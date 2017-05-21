@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+#/ command: docker:ps: "do a docker ps"
+#/ usage: rerun docker:ps [ --filter <>] 
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: FILTER
+
+. $RERUN_MODULE_DIR/lib/functions.sh ps || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+#rerun stubbs:add-option --option filter --required false --export false --command ps --module docker --description "filter the ps listing"
+#example docker ps --filter "name=mongo"
+if [[ ! -z "$FILTER" ]]; then
+   rerun terminal:banner-start --title 'docker ps --filter $FILTER'
+   docker ps --filter $FILTER
+   rerun terminal:banner-end
+else
+   rerun terminal:banner-start --title 'docker ps --filter $FILTER'
+   docker ps
+   rerun terminal:banner-end
+fi
+
+# Done. Exit with last command exit status.
+exit $?
+

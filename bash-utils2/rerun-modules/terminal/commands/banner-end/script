@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+#/ command: terminal:banner-end: "‘end"
+#/ usage: rerun terminal:banner-end [options]
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: 
+
+. $RERUN_MODULE_DIR/lib/functions.sh banner-end || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+
+#rerun stubbs:add-command --command banner-end --module terminal --description ‘end the banner’
+banner_end
+
+# Done. Exit with last command exit status.
+exit $?
+

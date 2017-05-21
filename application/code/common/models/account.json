@@ -1,0 +1,17 @@
+{
+  "name": "Account",
+  "base": "User",
+  "idInjection": true,
+  "forceId": false,
+  "public": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true,
+      "required": false,
+      "defaultFn": "uuid4",
+      "index": true
+    },
+    "hidden": ["password"]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "ios": {
+    "debug": {
+      "codeSignIdentity": "iPhone Development",
+      "developmentTeam": "James Vaughan (Personal Team)"
+    }
+  }
+}

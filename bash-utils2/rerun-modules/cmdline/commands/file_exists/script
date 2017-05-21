@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+#/ command: cmdline:file_exists: "checks that a file exists"
+#/ usage: rerun cmdline:file_exists  --file <>
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: FILE
+
+. $RERUN_MODULE_DIR/lib/functions.sh file_exists || {
+  echo >&2 "Failed loading function library." ; exit 1 ;
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+#rerun stubbs:add-command --module cmdline --command file_exists --description "checks that a file exists"
+#rerun stubbs:add-option --option file --export false --required true --default '' --module cmdline --command file_exists --description "the file to check for existence"
+
+check_for_file_exists $FILE
+
+
+
+# Done. Exit with last command exit status.
+exit $?
+

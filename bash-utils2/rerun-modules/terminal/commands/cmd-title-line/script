@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+#/ command: terminal:cmd-title-line: "create a command output line for easy reading"
+#/ usage: rerun terminal:cmd-title-line [options]
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables:
+
+. $RERUN_MODULE_DIR/lib/functions.sh cmd-title-line || {
+  echo >&2 "Failed loading function library." ; exit 1 ;
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+command_title_line
+
+# Done. Exit with last command exit status.
+exit $?
+

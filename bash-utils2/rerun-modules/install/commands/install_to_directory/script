@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+#/ command: install:install_to_directory: "copies a directory and subfiles to another location"
+#/ usage: rerun install:install_to_directory  --dest <> 
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: DEST
+
+. $RERUN_MODULE_DIR/lib/functions.sh install_to_directory || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+#rerun stubbs:add-command --module install --command install_to_directory --description "copies a directory and subfiles to another location"
+#rerun stubbs:add-option --option dest --require true --export false --module install --command install_to_directory --description "src to copy from"
+install_to_directory $SRC $DEST
+
+# Done. Exit with last command exit status.
+exit $?
+

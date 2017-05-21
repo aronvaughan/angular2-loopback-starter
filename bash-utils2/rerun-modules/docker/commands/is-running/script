@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+#/ command: docker:is-running: "check if a container is running"
+#/ usage: rerun docker:is-running [ --name <>] 
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: NAME
+
+. $RERUN_MODULE_DIR/lib/functions.sh is-running || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+#rerun stubbs:add-command --command is-running --module docker --description "check if a container is running"
+#rerun stubbs:add-option --option name --required false --export false --command is-running --module docker --description "check if a container is running"
+docker inspect -f {{.State.Running}} $NAME
+
+
+
+
+# Done. Exit with last command exit status.
+exit $?
+

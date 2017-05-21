@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+#/ command: terminal:banner-start: "highlight with a title output on the terminal"
+#/ usage: rerun terminal:banner-start  --title <> 
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: TITLE
+
+. $RERUN_MODULE_DIR/lib/functions.sh banner-start || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+
+#rerun stubbs:add-command --command banner-start --module terminal --description 'highlight with a title output on the terminal'
+#rerun stubbs:add-option --option title --required true --export false --command banner-start --module terminal --description 'highlight with a title output on the terminal'
+
+banner_start $TITLE
+
+# Done. Exit with last command exit status.
+exit $?
+

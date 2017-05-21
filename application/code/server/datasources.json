@@ -1,0 +1,10 @@
+{
+   "db": {
+      "name": "db",
+      "connector": "mongodb"
+   },
+
+  "email": {
+    "connector": "mail"
+  }
+}

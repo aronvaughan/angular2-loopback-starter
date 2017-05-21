@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+#/ command: mongo:install: "install mongo db"
+#/ usage: rerun mongo:install [options]
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: 
+
+. $RERUN_MODULE_DIR/lib/functions.sh install || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+#this causese issues with return codes....
+#set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+
+#install_mongo_docker_image_if_needed
+
+rerun docker:install-image --image $MONGO_IMAGE_NAME
+
+# Done. Exit with last command exit status.
+exit $?
+

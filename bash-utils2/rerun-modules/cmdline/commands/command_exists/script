@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+#/ command: cmdline:command_exists: "chekcs that a command line command exists"
+#/ usage: rerun cmdline:command_exists  --command <> 
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: COMMAND
+
+. $RERUN_MODULE_DIR/lib/functions.sh command_exists || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+#rerun stubbs:add-command --module cmdline --command command_exists --description "chekcs that a command line command exists"
+#rerun stubbs:add-option --option command --required true --export false --default '' --module cmdline --command command_exists --description "command line command to check if it exists"
+
+command_line_command_exists ()
+{
+  command -v "$1" >/dev/null 2>&1
+}
+
+command_line_command_exists $COMMAND
+
+#if exists bash; then
+#  echo 'Bash exists!'
+#else
+#  echo 'Your system does not have Bash'
+#fi
+
+# Done. Exit with last command exit status.
+exit $?

@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+#/ command: docker:build: "“build"
+#/ usage: rerun docker:build  --imagename <>  --dockerfile <.> [ --buildarg <>] 
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: IMAGENAME DOCKERFILE BUILDARG
+
+. $RERUN_MODULE_DIR/lib/functions.sh build || {
+  echo >&2 "Failed loading function library." ; exit 1 ;
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+#rerun stubbs:add-command --command build --module docker --description “build a docker image from a docker file“
+#rerun stubbs:add-option --option imagename --required true --export false --command build --module docker --description “an imagename to build“
+#rerun stubbs:add-option --option dockerfile  --default . --required true --export false --command build --module docker --description “a docker file used to build docker images“
+#build-arg
+# rerun stubbs:add-option --option buildarg --required false --export false --command build --module docker --description “any args to the docker build command“
+#rerun stubbs:add-option --option link --required false --export false --command build --module docker --description “any other container to link to“
+
+#echo "building docker image docker build --rm=true --force-rm=true -t $IMAGENAME --build-arg $BUILDARG -f $DOCKERFILE ."
+# FIXM add in buildarg again as full string so empty does not kill docker
+BUILDARG_STRING=""
+if [ ! -z "$BUILDARG" ]; then
+   BUILDARG_STRING=-"-build-arg $BUILDARG"
+fi
+
+echo docker build --rm=true --force-rm=true -t $IMAGENAME $BUILDARG_STRING -f $DOCKERFILE .
+docker build --rm=true --force-rm=true -t $IMAGENAME $BUILDARG_STRING -f $DOCKERFILE .
+
+# Done. Exit with last command exit status.
+exit $?
+

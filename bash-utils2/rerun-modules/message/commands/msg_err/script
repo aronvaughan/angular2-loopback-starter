@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+#/ command: message:msg_err: "print a message in red color"
+#/ usage: rerun message:msg_err  --msg <> 
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: MSG
+
+. $RERUN_MODULE_DIR/lib/functions.sh msg_err || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+#rerun stubbs:add-command --module message --command msg_err --description "print a message in red color"
+#rerun stubbs:add-option --option msg --description "the message to print in red color"  --module message --command msg_err --required true --export false
+clr_red "${MSG}"
+
+# Done. Exit with last command exit status.
+exit $?
+

@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+#/ command: loopback:build: "“build"
+#/ usage: rerun loopback:build [options]
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables:
+
+. $RERUN_MODULE_DIR/lib/functions.sh build || {
+  echo >&2 "Failed loading function library." ; exit 1 ;
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+#rerun stubbs:add-command --command build --module loopback --description “build the docker container for loopback“
+
+#echo creating dir docker/temp
+#mkdir -p docker/temp
+#echo copying code $LOOPBACK_PROJECT_ROOT to docker/temp
+#cp -R $LOOPBACK_PROJECT_ROOT docker/temp
+#docker build --rm=true --force-rm=true -f scripts/docker/loopback/Dockerfile --build-arg LOOPBACK_PROJECT_ROOT=$LOOPBACK_PROJECT_ROOT -t hp-loopback-node .
+#rerun docker:build --imagename av-loopback --dockerfile scripts/docker/loopback/Dockerfile --buildarg LOOPBACK_PROJECT_ROOT=$LOOPBACK_PROJECT_ROOT
+echo "running npm install"
+npm install .
+DBHOST=`ipconfig getifaddr en0`
+echo "DBHOST is $DBHOST"
+rerun docker:build --imagename av-loopback --dockerfile Dockerfile --buildarg DBHOST=$DBHOST
+#echo cleaning up
+#rm -rf docker/temp
+#cd -
+
+
+
+# Done. Exit with last command exit status.
+exit $?
+

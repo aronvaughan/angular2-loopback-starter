@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+#/ command: docker:stop: "stop a container"
+#/ usage: rerun docker:stop  --name <> 
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: NAME
+
+. $RERUN_MODULE_DIR/lib/functions.sh stop || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+#rerun stubbs:add-command --command stop --module docker --description "stop a container"
+#rerun stubbs:add-option --option name --export false --required true --command stop --module docker --description "the name for this conatiner instance"
+docker stop $NAME
+
+# Done. Exit with last command exit status.
+exit $?
+

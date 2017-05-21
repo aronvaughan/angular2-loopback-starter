@@ -1,0 +1,13 @@
+#!/bin/sh
+export USING_BASH_UTILS=~/Content/Code/restapp/bash-utils2
+export BASH_UTILS_HOME=~/Content/Code/restapp/bash-utils2
+
+export LOOPBACK_PROJECT_ROOT=./code
+export LOOPBACK_PROJECT_NAME=ExampleApp
+#export PROJECT_ROOT=${LOOPBACK_PROJECT_ROOT}/..
+export DB_HOST=localhost
+
+echo "using bash utils $USING_BASH_UTILS"
+echo "name $LOOPBACK_PROJECT_NAME"
+echo "will build loopback CRUD project $LOOPBACK_PROJECT_ROOT"
+

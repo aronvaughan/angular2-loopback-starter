@@ -1,0 +1,25 @@
+FROM strongloop/node
+
+# You start off as the 'strongloop' user.
+# If a RUN command needs root, you can use sudo
+
+# In addition to standard Linux commands you also have access to node, npm,
+# and slc commands
+
+# It is common to copy your current
+# ARG LOOPBACK_PROJECT_ROOT
+# RUN echo "LOOPBACK ROOT $LOOPBACK_PROJECT_ROOT"
+# RUN if [ -n "$LOOPBACK_PROJECT_ROOT" ]; then echo 1; else echo 0; fi
+# only do in production mode....
+# ADD $LOOPBACK_PROJECT_ROOT /home/strongloop/app
+RUN echo "app is mounted at `ls -al /home/strongloop/app`"
+
+ENV NODE_ENV development
+if [
+# It is common to copy your current
+ADD . /home/strongloop/app
+WORKDIR /home/strongloop/app
+RUN sudo npm install
+
+EXPOSE 3000
+CMD [ "slc", "run", "." ]

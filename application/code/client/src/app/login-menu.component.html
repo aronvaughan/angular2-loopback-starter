@@ -1,0 +1,11 @@
+<nav class="nav nav-sm header-block-flex">
+  <div *ngIf="account" class="animate-if nav nav-sm header-block-flex">{{account.getUserDisplayName()}}&nbsp;<i (click)="logout()" class="fa fa-sign-out"></i></div>
+  <div *ngIf="!account" class="nav nav-sm header-block-flex">
+    <!--
+     <a class="nav-link hidden-md-up" href="login.htm"><i class="fa fa-user"></i></a>
+     -->
+    <a class="nav-link hidden-md-up" routerLink="/login" routerLinkActive="active"><i class="fa fa-user"></i></a>
+    <a class="nav-link text-xs text-uppercase hidden-sm-down" routerLink="/signup" routerLinkActive="active" >Sign Up</a>
+    <a class="nav-link text-xs text-uppercase hidden-sm-down" routerLink="/login" routerLinkActive="active">Login</a>
+  </div>
+</nav>

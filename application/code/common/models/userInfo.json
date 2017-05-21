@@ -1,0 +1,27 @@
+{
+  "name": "UserInfo",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "forceId": false,
+  "public": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true,
+      "required": false,
+      "defaultFn": "uuid4",
+      "index": true
+    }
+  },
+  "relations": {
+    "addresses": {
+      "type": "hasMany",
+      "model": "Address",
+      "polymorphic":
+      { "as": "ref"}
+    }
+  },
+  "mixins": {
+    "TimeStamp" : true
+  }
+}

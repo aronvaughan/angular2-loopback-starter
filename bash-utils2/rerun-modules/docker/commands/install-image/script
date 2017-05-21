@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+#/ command: docker:install-image: "see if an image is installed locally and if not, fetch it"
+#/ usage: rerun docker:install-image  --image <> 
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: IMAGE
+
+. $RERUN_MODULE_DIR/lib/functions.sh install-image || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+#set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+install_docker_image_if_needed $IMAGE
+
+# Done. Exit with last command exit status.
+exit $?
+

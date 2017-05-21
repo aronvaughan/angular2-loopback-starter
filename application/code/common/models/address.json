@@ -1,0 +1,39 @@
+{
+  "name": "Address",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "forceId": false,
+  "public": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true,
+      "required": false,
+      "defaultFn": "uuid4",
+      "index": true
+    },
+    "line1": {
+      "type": "string",
+      "required": true
+    },
+    "line2": {
+      "type": "string",
+      "required": false
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "state": {
+      "type": "string",
+      "required": "true"
+    },
+    "zip": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "mixins": {
+    "TimeStamp" : true
+  }
+}

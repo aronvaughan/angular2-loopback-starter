@@ -1,0 +1,5 @@
+application/code/client/src/app/shared/angular-client
+*.map
+main.js
+datasources.local.js
+application/code/target

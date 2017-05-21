@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+#/ command: docker:run: "start a docker container"
+#/ usage: rerun docker:run [ --name <>] [ --ports <>] [ --volumes <>]  --image <> [ --options <>] [ --cmd <>] [ --link <>] 
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: NAME PORTS VOLUMES IMAGE OPTIONS CMD LINK
+
+. $RERUN_MODULE_DIR/lib/functions.sh run || {
+  echo >&2 "Failed loading function library." ; exit 1 ;
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+
+#rerun stubbs:add-command --command run --module docker --description "start a docker container"
+#rerun stubbs:add-option --option name --export false --required true --command run --module docker --description "the name for this conatiner instance"
+#rerun stubbs:add-option --option ports --export false --required false --command run --module docker --description "ports to expose, examplee -p 27017:27017"
+#rerun stubbs:add-option --option volumes --export false --required false --command run --module docker --description "the volumes to mount, example -v /somewhere/onmyhost/mydatabase:/data/db"
+#rerun stubbs:add-option --option image --export false --required true --command run --module docker --description "the image to run"
+#rerun stubbs:add-option --option options --required false --export false --command run --module docker --description "additional command line options for the docker container"
+#rerun stubbs:add-option --option cmd --required false --export false --command run --module docker --description "command to pass to the docker run call"
+#rerun stubbs:add-option --option link --required false --export false --command run --module docker --description “any other container to link to“
+
+#PORTS="-p 27017:27017"
+
+echo "OPTIONS $OPTIONS"
+if [ ! "$(docker ps -q -f name=$NAME)" ]; then
+    if [ "$(docker ps -aq -f status=exited -f name=$NAME)" ]; then
+        # cleanup
+        rerun_log info "docker:run cleaning up old container $NAME"
+        docker rm $NAME
+    fi
+    LINKARG_STRING=""
+    if [ ! -z "$LINK" ]; then
+        LINKARG_STRING="--link $LINK"
+    fi
+    # run your container
+    rerun_log info "docker run -d --name $NAME $PORTS $VOLUMES $LINKARG_STRING $IMAGE  $CMD $OPTIONS"
+    docker run -d --name $NAME $PORTS $VOLUMES $LINKARG_STRING $IMAGE $CMD $OPTIONS
+else
+    rerun_log info "rerun:docker docker already running $NAME $IMAGE $CMD $OPTIONS"
+fi
+
+# Done. Exit with last command exit status.
+exit $?
+

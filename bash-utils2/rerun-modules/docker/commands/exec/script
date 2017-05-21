@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+#/ command: docker:exec: "execute a command on a container"
+#/ usage: rerun docker:exec  --name <>  --command <> 
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: NAME COMMAND
+
+. $RERUN_MODULE_DIR/lib/functions.sh exec || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+
+#rerun stubbs:add-command --command exec --module docker --description "execute a command on a container"
+#rerun stubbs:add-option --option name --export false --required true --command exec --module docker --description "the name for this conatiner instance"
+#rerun stubbs:add-option --option command --export false --required true --command exec --module docker --description "the command to execute"
+docker exec -ti $NAME $COMMAND
+
+# Done. Exit with last command exit status.
+exit $?
+

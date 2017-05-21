@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+#/ command: cmdline:dir_exists: "checks that a dir exists"
+#/ usage: rerun cmdline:dir_exists [ --dir <>]
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: DIR
+
+. $RERUN_MODULE_DIR/lib/functions.sh dir_exists || {
+  echo >&2 "Failed loading function library." ; exit 1 ;
+}
+
+#set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+check_for_directory_exists $DIR
+
+# - - -
+# Put the command implementation here.
+# - - -
+#rerun stubbs:add-command --module cmdline --command dir_exists --description "checks that a dir exists"
+#rerun stubbs:add-option --option dir --export false --required false --default '' --module cmdline --command dir_exists --description "checks that a dir exists"
+
+
+
+# Done. Exit with last command exit status.
+exit $?
+

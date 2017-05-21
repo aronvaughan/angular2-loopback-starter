@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+#/ command: loopback:run: "“startup"
+#/ usage: rerun loopback:run [options]
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables:
+
+. $RERUN_MODULE_DIR/lib/functions.sh run || {
+  echo >&2 "Failed loading function library." ; exit 1 ;
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+
+#rerun stubbs:add-command --command run --module loopback --description “startup the loopback docker container“
+
+#TODO update
+#rerun stubbs:add-option --option data --required true --export false --command run --module mongo --description "where to mount the data volumes"
+#docker run -d --name mongo -p 27017:27017 -v /somewhere/onmyhost/mydatabase:/data/db mvertes/alpine-mongo
+# docker run -d --name mongo -p 27017:27017 -p 28017:28017 -v mongo-data:/data/db mvertes/alpine-mongo mongod --rest
+
+
+#DIR_EXISTS=`rerun cmdline:dir_exists --dir $DATA`
+#if [[ ${DIR_EXISTS} -eq 0 ]]; then
+#   rerun_log info "creating data dir $DATA"
+#   mkdir -p $DATA
+#fi
+rerun_log info docker:run --name av-loopback --image av-loopback --ports "-p 3000:3000" --volumes "-v code:/app" --link mongo
+rerun docker:run --name av-loopback --image av-loopback --ports "-p 3000:3000" --volumes "-v code:/app" --link mongo
+rerun_log rerun docker:ps --filter name=av-loopback
+rerun docker:ps --filter name=av-loopback
+
+
+# Done. Exit with last command exit status.
+exit $?
+

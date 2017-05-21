@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+#/ command: docker:exec-sh: "connect to a shell of a container by name"
+#/ usage: rerun docker:exec-sh  --name <> 
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: NAME
+
+. $RERUN_MODULE_DIR/lib/functions.sh exec-sh || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# - - -
+# Put the command implementation here.
+# - - -
+#rerun stubbs:add-command --command exec-sh --module docker --description "connect to a shell of a container by name"
+#rerun stubbs:add-option --option name --export false --required true --command exec-sh --module docker --description "the name for this conatiner instance"
+
+docker exec -ti $NAME sh
+
+# Done. Exit with last command exit status.
+exit $?
+
