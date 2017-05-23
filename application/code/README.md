@@ -28,17 +28,24 @@
 # Server
 
 ## initialize your environment
+1. you must do this for any terminal you open
 1. open a terminal window
 1. cd this project/application/code
 1. edit ./bin/required-settings.sh (follow comments in file)
 1. source ./bin/init.sh
 
-## run the server
-1. cd server
+## initialize the server
+1. cd application/code
 1. npm install
-1. node .
 
-## once started, server resources
+## run the server
+1. cd application/code
+1. gulp run
+
+TODO: hook up latest ng-cli
+
+## verify server is working, server resources
+1. load http://127.0.0.1:3002/status (you can also use localhost)
 1. auto generated swagger REST UI http://127.0.0.1:3002/explorer
 1. out-of-the-box features
     1. filtering examples
@@ -55,26 +62,45 @@
 1. REST api http://127.0.0.1:3002/api
 1. health status http://127.0.0.1:3002/status
 
-## see available gulp commands
-1. cd server
+## other information for server
+
+### verify mongo is running
+1. open browser to http://localhost:28017/
+
+### see available gulp commands
+1. cd application/code
 1. gulp
 
-## re-generate the angular client library for your api
-1. cd server
+### expert level - see bundled bash utils commands
+1. cd application/code
+1. rerun<enter>
+
+### rerun example
+1. rerun mongo 
+1. will show all bundled bash mongo commands
+1. rerun mongo:is-running will check to see if mongo is running
+1. you can bind rerun commands to gulp if/when needed
+
+### re-generate the angular client library for your api
+
+1. cd application/code
 1. gulp angularGenClient
 1. NOTE: will prompt if client lib already exists (press Y to overwrite)
 
-## running tests and coverage
-1. cd server
+### running tests and coverage
+1. cd application/code
 1. gulp test
 
-## see coverage reports
-1. cd server
+### see coverage reports
+1. cd application/code
 1. gulp test-report
 
-## setting up email (optional for password reset)
+
+### setting up email (optional for password reset)
 1. open server/datasources.development.js and copy email config to a new file: server/datasources.local.js
 1. update user, pass (and port/server if needed - this is the hotmail config by default)
+
+----
 
 # Client
 
@@ -82,6 +108,8 @@
 1. follow setps in 'server' initialize your environment (above)
 
 ## run the client
+1. cd application/code
+1. gulp angularGenClient
 1. cd client
 1. npm install 
 1. npm start

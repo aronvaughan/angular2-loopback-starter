@@ -4,6 +4,7 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import {Account} from "./shared/angular-client/models/Account";
 import {AccountApi} from "./shared/angular-client/services/custom/Account";
 import {AccessToken} from "./shared/angular-client/models/BaseModels";
+import {Subject} from "rxjs";
 
 export class LoginData {
   email: string;
@@ -50,7 +51,7 @@ export class CurrentAccountService implements OnInit {
    *
    * @param signupData
    */
-  create( signupData: SignupData): void {
+  create( signupData: SignupData, callback?: any): void {
     console.log('current account service creating user...', signupData);
     //var createdUser = new Observable<User>();
     this.accountApi.create(signupData).subscribe((accountData) =>
@@ -60,8 +61,14 @@ export class CurrentAccountService implements OnInit {
       //createdUser.next(userData);
       accountData.password = signupData.password;
       this.login(accountData);
+      if (callback) {
+        callback(null, accountData);
+      }
     }, error => {
-      console.log('login error!', error);
+      console.log('signup error!', error);
+      if (callback) {
+        callback(error, undefined);
+      }
     });
     //return createdUser;
   }
@@ -80,7 +87,7 @@ export class CurrentAccountService implements OnInit {
       console.log("login data", accountData);
       this.accessToken = accountData.id;
       this.pushAccountUpdate(accountData.user);
-      alert('Fake Redirect')
+      //alert('Fake Redirect');
       if (callback) {
         callback(null, accountData.user);
       }
@@ -96,14 +103,34 @@ export class CurrentAccountService implements OnInit {
    * send a password reset email to the user with a short ttl token for access to this account
    * @param loginInfo
    */
-  resetPassword( loginInfo: LoginData ): void {
-    console.log('resetPassword called', loginInfo);
+  resetPassword( loginInfo: LoginData): void {
     this.accountApi.resetPassword(loginInfo).subscribe((accountData) =>
     {
       console.log('reset pass for account', accountData);
 
     }, error => {
       console.log('reset pass!', error);
+
+    });
+  }
+
+  /**
+   * how do we return observable and avoid a callback function for errors...
+   * @param loginInfo
+   * @returns {Subject<any>}
+   */
+  resetPassword2( loginInfo: LoginData ): Observable<any> {
+    console.log('resetPassword2 called', loginInfo);
+
+    return this.accountApi.resetPassword(loginInfo).map(
+      (accountData) =>
+    {
+      console.log('reset pass for account', accountData);
+      return accountData;
+
+    }).catch((e) => {
+      console.log('resetpassword2 caught error, rethrowing....', e);
+      Observable.throw(e)
     });
   }
 

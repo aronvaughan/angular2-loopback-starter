@@ -17,7 +17,9 @@ if (process.env.NODE_ENV === envCommon.ENV_DEV) {
 //https://github.com/knpwrs/gulp-spawn-mocha
 gulp.task('mongo-start', [], function() {
     console.log('mongo-start: running mongo:run');
-    gulpCommon.runCommandSync('mongo-start TEMP!: ', process.env.USING_BASH_UTILS+'/deploy-local.sh', []);
+    //export latest bash utils scripts globally - TEMP!
+    gulpCommon.runCommandSync('mongo-start TEMP!: ', process.env.BASH_UTILS_HOME+'/deploy-local.sh', []);
+    //start mongo
     gulpCommon.runCommandSync('mongo-start: ', 'rerun', ['mongo:run']);
 });
 

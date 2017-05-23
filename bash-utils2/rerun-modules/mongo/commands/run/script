@@ -25,10 +25,15 @@ rerun_options_parse "$@"
 #docker run -d --name mongo -p 27017:27017 -v /somewhere/onmyhost/mydatabase:/data/db mvertes/alpine-mongo
 # docker run -d --name mongo -p 27017:27017 -p 28017:28017 -v mongo-data:/data/db mvertes/alpine-mongo mongod --rest
 
+PWD=`pwd`
+echo "current dir $PWD"
 DIR_EXISTS=`rerun cmdline:dir_exists --dir $DATA`
+echo "data dir exists? $DIR_EXISTS"
 if [[ ${DIR_EXISTS} -eq 0 ]]; then
    rerun_log info "creating data dir $DATA"
    mkdir -p $DATA
+else
+   echo "using data dir: $DATA"
 fi
 rerun_log info rerun docker:run --name mongo --image $MONGO_IMAGE_NAME --ports "-p 27017:27017 -p 28017:28017" --volumes "-v ${DATA}:/data/db" --cmd "mongod" --options "--rest"
 rerun docker:run --name mongo --image $MONGO_IMAGE_NAME --ports "-p 27017:27017 -p 28017:28017" --volumes "-v ${DATA}:/data/db"  --cmd "mongod" --options "--rest"

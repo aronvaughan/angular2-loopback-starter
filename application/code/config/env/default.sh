@@ -3,8 +3,8 @@ export ENV_VALUE=development
 
 export DOG="meow"
 
-export USING_BASH_UTILS=~/Content/Code/restapp/bash-utils2
-export BASH_UTILS_HOME=~/Content/Code/restapp/bash-utils2
+#export USING_BASH_UTILS=~/Content/Code/restapp/bash-utils2
+#export BASH_UTILS_HOME=~/Content/Code/restapp/bash-utils2
 
 export LOOPBACK_PROJECT_ROOT=./code
 export LOOPBACK_PROJECT_NAME=ExampleApp

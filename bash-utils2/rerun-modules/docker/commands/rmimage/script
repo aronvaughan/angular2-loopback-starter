@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+#/ command: docker:rmimage: "remove all images with a given name"
+#/ usage: rerun docker:rmimage  --imagename <> [ --force <false>] 
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: IMAGENAME FORCE
+
+. $RERUN_MODULE_DIR/lib/functions.sh rmimage || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+# docker rmi $(docker images | grep $IMAGE_NAME | awk {'print $3'})
+# rerun stubbs:add-command --command rmimage --module docker --description "remove all images with a given name"
+# rerun stubbs:add-option --option imagename --export false --required true --command rmimage --module docker --description "the image name to remove instances of, use 'none' for unnamed images"
+# rerun stubbs:add-option --option force --export false --required false --command rmimage --module docker --description "force image removal"
+
+echo "removing images.....$IMAGENAME"
+docker images | grep $IMAGENAME
+echo "image numbers"
+if [ "$FORCE" = true ]; then
+   docker rmi --force $(docker images | grep $IMAGENAME | awk {'print $3'})
+else
+   docker rmi $(docker images | grep $IMAGENAME | awk {'print $3'})
+fi
+
+echo "removal complete."
+# - - -
+# Put the command implementation here.
+# - - -
+
+# Done. Exit with last command exit status.
+exit $?
+

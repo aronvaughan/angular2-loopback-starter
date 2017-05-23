@@ -2,7 +2,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ClientConfig } from './shared/utility/angular-client.utility';
 import { LoginData, CurrentAccountService } from './current-account.service';
-import { Router } from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
+import {BaseComponent} from "./base.component";
 
 
 @Component({
@@ -11,28 +12,32 @@ import { Router } from '@angular/router';
   providers: [ClientConfig]
   //, styleUrls: [ './dashboard.component.css' ]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends BaseComponent implements OnInit {
 
    data: LoginData = {
        email: "",
        password: ""
    };
 
-  /**
-   * used to show form level errors to user
-   * @type {string}
-   */
-  formErrorMessage: string = undefined;
+   url: string = undefined;
+
 
   constructor(private clientConfig: ClientConfig,
               private currentAccountService: CurrentAccountService,
-              private router: Router) {
-    clientConfig.init();
+              private router: Router,
+              private route: ActivatedRoute) {
+
+    super(clientConfig);
+
+    this.route.params.subscribe( params => {
+      this.url = params['url'];
+      console.log('url passed in ', this.url);
+    });
   }
 
   ngOnInit(): void {
 
-    this.formErrorMessage = undefined;
+    this.clearErrorMessage();
 
     console.log("Login Component init called");
     this.currentAccountService.currentAccount.subscribe(
@@ -45,17 +50,31 @@ export class LoginComponent implements OnInit {
     //console.log('current user ', this.userApi.getCurrent().subscribe( (value: any) => console.log("user", value)) );
   }
 
+  navigateAfterLogin(): void {
+    if (this.url) {
+      console.log('custom url entered', this.url);
+      this.router.navigate([this.url]);
+    } else {
+      console.log('default url /');
+      this.router.navigate(['/']);
+    }
+  }
+
+  navigateAfterLogout(): void {
+    this.navigateAfterLogin();
+  }
+
   login(): void {
     console.log("login component: Login called", this.data);
     var self = this;
-    this.currentAccountService.login(this.data, function (err, data) {
+    this.currentAccountService.login(this.data, function (err: any, data: any) {
       if (err) {
         console.log("got error from login", err);
-        self.formErrorMessage = err.message;
+        self.setErrorMessage(err.message);
       } else {
         console.log('successful login', data);
-        self.formErrorMessage = undefined;
-        self.router.navigate(['/']);
+        self.clearErrorMessage();
+        self.navigateAfterLogin();
       }
     });
   }
@@ -63,7 +82,7 @@ export class LoginComponent implements OnInit {
   logout(): void {
     console.log("logout called");
     this.currentAccountService.logout();
-    this.router.navigate(['/']);
+    this.navigateAfterLogout();
   }
 
 }
