@@ -15,7 +15,7 @@ export class SignupComponent extends BaseComponent implements OnInit {
   data: SignupData = new SignupData();
   angular: any;
 
-  constructor(private clientConfig: ClientConfig,
+  constructor(protected clientConfig: ClientConfig,
               private currentAccountService: CurrentAccountService,
   private router: Router) {
     super(clientConfig);

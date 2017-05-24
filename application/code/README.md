@@ -129,3 +129,7 @@ TODO: hook up latest ng-cli
      1. http://localhost:3000/resetPasswordRequest - to reset password 
 1. generated angular client code in client/app/shared/angular-client
 
+## resources
+
+1. http://reactivex.io/rxjs/manual/overview.html#categories-of-operators
+

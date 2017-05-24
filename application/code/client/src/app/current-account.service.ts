@@ -1,10 +1,11 @@
 import {Injectable, OnInit} from '@angular/core';
 import { Observable }  from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import {Account} from "./shared/angular-client/models/Account";
-import {AccountApi} from "./shared/angular-client/services/custom/Account";
-import {AccessToken} from "./shared/angular-client/models/BaseModels";
-import {Subject} from "rxjs";
+import { Account } from "./shared/angular-client/models/Account";
+import { AccountApi } from "./shared/angular-client/services/custom/Account";
+import { AccessToken } from "./shared/angular-client/models/BaseModels";
+import { Subject } from "rxjs/Subject";
+import { ServiceSubscriberUtility } from "./shared/utility/service-subscriber-utility";
 
 export class LoginData {
   email: string;
@@ -122,16 +123,28 @@ export class CurrentAccountService implements OnInit {
   resetPassword2( loginInfo: LoginData ): Observable<any> {
     console.log('resetPassword2 called', loginInfo);
 
-    return this.accountApi.resetPassword(loginInfo).map(
-      (accountData) =>
-    {
-      console.log('reset pass for account', accountData);
-      return accountData;
+    var utility : ServiceSubscriberUtility = new ServiceSubscriberUtility(this);
+    return utility.subscribe(this.accountApi.resetPassword(loginInfo));
 
-    }).catch((e) => {
-      console.log('resetpassword2 caught error, rethrowing....', e);
-      Observable.throw(e)
-    });
+
+    /*
+    var subject: Subject<any> = new Subject<any>();
+
+    this.accountApi.resetPassword(loginInfo).subscribe(
+      (accountData) =>
+      {
+        console.log('reset pass for account', accountData);
+        subject.next(accountData);
+
+      }, error => {
+        console.log('resetpassword2 caught error, rethrowing....', error);
+        subject.error(error);
+      }, () => {
+        subject.complete();
+      });
+
+    return subject;
+    */
   }
 
   /**

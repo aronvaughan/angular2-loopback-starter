@@ -13,7 +13,7 @@ export class LoginMenuComponent implements OnInit {
 
   account : any = undefined;
 
-  constructor(private clientConfig: ClientConfig, private currentAccountService: CurrentAccountService) {
+  constructor(protected clientConfig: ClientConfig, private currentAccountService: CurrentAccountService) {
     clientConfig.init();
   }
 

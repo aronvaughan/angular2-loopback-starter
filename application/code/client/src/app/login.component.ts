@@ -22,7 +22,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
    url: string = undefined;
 
 
-  constructor(private clientConfig: ClientConfig,
+  constructor(protected clientConfig: ClientConfig,
               private currentAccountService: CurrentAccountService,
               private router: Router,
               private route: ActivatedRoute) {

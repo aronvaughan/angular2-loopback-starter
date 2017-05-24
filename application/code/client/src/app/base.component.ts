@@ -16,7 +16,7 @@ export class BaseComponent {
    */
   errorMessage: string = undefined;
 
-  constructor(private clientConfig: ClientConfig) {
+  constructor(protected clientConfig: ClientConfig) {
     //initialize the generated client library for talking with our server
     clientConfig.init();
   }
