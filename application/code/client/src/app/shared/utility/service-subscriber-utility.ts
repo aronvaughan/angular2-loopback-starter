@@ -11,13 +11,13 @@ export class ServiceSubscriberUtility {
 
   }
 
-  subscribe(observable : Observable): Subject<any> {
+  subscribe(observable : Observable<any>): Subject<any> {
     var subject: Subject<any> = new Subject<any>();
     observable.subscribe(this.getDataClosure(subject), this.getErrorClosure(subject), this.getCompleteClosure(subject));
     return subject;
   }
 
-  getDataClosure(subject: Subject<any>) {
+  getDataClosure(subject: Subject<any>) : any {
     return data => {
       console.log(this.service.constructor.name, '!!!! service got data, passing on to subscribers!!!!', data);
       subject.next(data);
@@ -29,14 +29,14 @@ export class ServiceSubscriberUtility {
    * updates the component error message to display the error to the user
    * @returns {(error?:any)=>undefined}
    */
-  getErrorClosure(subject: Subject<any>) {
-    return error => {
+  getErrorClosure(subject: Subject<any>) : any {
+    return error  => {
       console.log(this.service.constructor.name, '!!!! service got error!!!!', error);
       subject.error(error);
     };
   }
 
-  getCompleteClosure(subject: Subject<any>) {
+  getCompleteClosure(subject: Subject<any>) : any {
     return () => {
       console.log(this.service.constructor.name, '!!!! service got complete!!!!');
       subject.complete();

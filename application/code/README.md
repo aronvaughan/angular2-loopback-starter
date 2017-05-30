@@ -131,5 +131,17 @@ TODO: hook up latest ng-cli
 
 ## resources
 
-1. http://reactivex.io/rxjs/manual/overview.html#categories-of-operators
+1. RXJS docs: http://reactivex.io/rxjs/manual/overview.html#categories-of-operators
+1. Angular 2 Client generator: https://github.com/mean-expert-official/loopback-sdk-builder
+
+----
+# Troubleshooting
+
+## jquery not found
+npm install --save jquery
+npm install -D @types/jquery
+
+### alternate
+npm install -g typings --save
+typings install dt~jquery --global --save
 

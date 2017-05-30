@@ -3,6 +3,7 @@ import {Component, AfterContentChecked, OnInit, Inject} from '@angular/core';
 import {WindowRef} from './shared/utility/windowref';
 
 
+
 @Component({
   selector: 'my-app',
   styleUrls: ['./app.component.css'],
