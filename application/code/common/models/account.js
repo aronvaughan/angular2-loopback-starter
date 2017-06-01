@@ -10,40 +10,6 @@ module.exports = function(Account) {
 
   console.log('module account extension called');
 
-  //send verification email after registration
-  /*
-  User.afterRemote('create', function(context, user, next) {
-    console.log('> user.afterRemote triggered');
-
-    var options = {
-      type: 'email',
-      to: user.email,
-      from: 'noreply@loopback.com',
-      subject: 'Thanks for registering.',
-      template: path.resolve(__dirname, '../../server/views/verify.ejs'),
-      redirect: '/verified',
-      user: user
-    };
-
-    user.verify(options, function(err, response) {
-      if (err) {
-        User.deleteById(user.id);
-        return next(err);
-      }
-
-      console.log('> verification email sent:', response);
-
-      context.res.render('response', {
-        title: 'Signed up successfully',
-        content: 'Please check your email and click on the verification link ' +
-        'before logging in.',
-        redirectTo: '/',
-        redirectToLinkText: 'Log in'
-      });
-    });
-  });
-  */
-
   //send password reset link when requested
   Account.on('resetPasswordRequest', function(info) {
     console.log( 'got reset password request event', info);
@@ -80,7 +46,6 @@ module.exports = function(Account) {
       return cb(error);
     }
 
-
     //verify passwords match
     if (! newPassword ||
       !confirmPassword ||
@@ -115,62 +80,10 @@ module.exports = function(Account) {
             if (err) return res.sendStatus(404);
             console.log('> password reset processed successfully', user);
             cb(null, 'Password changed.');
-            /*
-             res.render('response', {
-             title: 'Password reset success',
-             content: 'Your password has been reset successfully',
-             redirectTo: '/',
-             redirectToLinkText: 'Log in'
-             });*/
           });
         });
       });
     });
   };
 
-      /*
-    User.findById(req.accessToken.userId, function(err, user) {
-      if (err) return res.sendStatus(404);
-      user.updateAttribute('password', req.body.password, function(err, user) {
-        if (err) return res.sendStatus(404);
-        console.log('> password reset processed successfully');
-        res.render('response', {
-          title: 'Password reset success',
-          content: 'Your password has been reset successfully',
-          redirectTo: '/',
-          redirectToLinkText: 'Log in'
-        });
-      });
-    });
-  }
-    cb(null, 'Password changed.');
-  }*/
-
-
-  //reset the user's pasword
-    /*
-  router.post('/reset-password', function(req, res, next) {
-    if (!req.accessToken) return res.sendStatus(401);
-
-    //verify passwords match
-    if (!req.body.password ||
-      !req.body.confirmation ||
-      req.body.password !== req.body.confirmation) {
-      return res.sendStatus(400, new Error('Passwords do not match'));
-    }
-
-    User.findById(req.accessToken.userId, function(err, user) {
-      if (err) return res.sendStatus(404);
-      user.updateAttribute('password', req.body.password, function(err, user) {
-        if (err) return res.sendStatus(404);
-        console.log('> password reset processed successfully');
-        res.render('response', {
-          title: 'Password reset success',
-          content: 'Your password has been reset successfully',
-          redirectTo: '/',
-          redirectToLinkText: 'Log in'
-        });
-      });
-    });
-    */
 };

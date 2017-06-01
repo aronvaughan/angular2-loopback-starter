@@ -6,6 +6,7 @@ var git = require('gulp-git');
 // readJson(filename, [logFunction=noop], [strict=false], cb)
 
 var sourceVersion = undefined;
+var dryRun='--dry-run';
 
 function readVersion(callback) {
   readJson('./package.json', console.error, false, function (er, data) {
@@ -74,12 +75,12 @@ gulp.task('bumpAndCommitVersion', ['bumpVersion'], function() {
   bannerMessage('committing version: '+sourceVersion);
   return gulp.src('./package.json')
     .pipe(git.add({args: '--dry-run --verbose'}))
-    .pipe(git.commit('version '+sourceVersion, {args: '--dry-run --verbose'}));
+    .pipe(git.commit('version '+sourceVersion, {args: dryRun+' --verbose'}));
 });
 
 gulp.task('pushVersion', ['bumpAndCommitVersion'], function() {
   bannerMessage('pushing version: '+sourceVersion);
-  return git.push('origin', 'master', {args: '--dry-run --verbose'}, function (err) {
+  return git.push('origin', 'master', {args: dryRun+' --verbose'}, function (err) {
     if (err) {
       console.log('error in push!!!!');
       throw err;
@@ -91,18 +92,17 @@ gulp.task('pushVersion', ['bumpAndCommitVersion'], function() {
 
 gulp.task('tagVersion', ['pushVersion'], function() {
   bannerMessage('tagging version: '+sourceVersion);
-  return git.tag('t_'+sourceVersion, 'Version: '+sourceVersion, {args: '--dry-run --verbose'}, function (err) {
+  return git.tag('t_'+sourceVersion, 'Version: '+sourceVersion, {args: dryRun+' --verbose'}, function (err) {
     if (err) throw err;
   });
 });
 
 gulp.task('branchVersion', ['tagVersion'], function() {
   bannerMessage('branching version: '+sourceVersion);
-  return git.branch('b_'+sourceVersion, {args: "--dry-run --verbose"}, function (err) {
+  return git.branch('b_'+sourceVersion, {args: dryRun+" --verbose"}, function (err) {
     if (err) throw err;
   });
 });
-
 
 gulp.task('release', ['branchVersion'], function() {
   bannerMessage('releasing version: '+sourceVersion);

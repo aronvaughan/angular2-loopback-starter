@@ -4,6 +4,11 @@
       "connector": "mongodb"
    },
 
+  "memory": {
+    "name": "memory",
+    "connector": "memory"
+  },
+
   "email": {
     "connector": "mail"
   }

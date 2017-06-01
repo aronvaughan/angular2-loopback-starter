@@ -1,6 +1,6 @@
 {
   "name": "angular2-loopback-starter",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "server/server.js",
   "scripts": {
     "lint": "eslint .",
@@ -25,7 +25,8 @@
     "socket.io": "^1.7.3",
     "socket.io-client": "^1.7.3",
     "socketio-auth": "^0.1.0",
-    "strong-error-handler": "^1.0.1"
+    "strong-error-handler": "^1.0.1",
+    "us-states": "0.0.1"
   },
   "devDependencies": {
     "@mean-expert/loopback-component-realtime": "^1.0.0-rc.5",

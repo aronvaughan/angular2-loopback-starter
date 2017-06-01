@@ -18,6 +18,7 @@ export class ComponentSubscriberUtility {
   getDataClosure() : any {
     return data => {
       console.log(this.baseComponent.constructor.name, '!!!! got data!!!!', data);
+      this.baseComponent.setDataReceived(data);
     };
   }
 
