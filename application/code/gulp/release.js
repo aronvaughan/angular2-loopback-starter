@@ -93,7 +93,7 @@ gulp.task('pushVersion', ['bumpAndCommitVersion'], function() {
 
 gulp.task('tagVersion', ['pushVersion'], function() {
   bannerMessage('tagging version: '+sourceVersion);
-  return git.tag('t_'+sourceVersion, 'Version: '+sourceVersion, {args: dryRun+' --verbose'}, function (err) {
+  return git.tag('t_'+sourceVersion, 'Version: '+sourceVersion, {args: dryRun}, function (err) {
     if (err) throw err;
   });
 });
