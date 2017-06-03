@@ -6,7 +6,8 @@ var git = require('gulp-git');
 // readJson(filename, [logFunction=noop], [strict=false], cb)
 
 var sourceVersion = undefined;
-var dryRun='--dry-run';
+//var dryRun='--dry-run';
+var dryRun='';
 
 function readVersion(callback) {
   readJson('./package.json', console.error, false, function (er, data) {
