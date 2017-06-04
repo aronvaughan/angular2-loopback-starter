@@ -93,10 +93,11 @@ gulp.task('pushVersion', ['bumpAndCommitVersion'], function() {
 
 gulp.task('tagVersion', ['pushVersion'], function() {
   bannerMessage('tagging version: '+sourceVersion);
-  return git.tag('t_'+sourceVersion, 'Version: '+sourceVersion, {args: dryRun}, function (err) {
+  var tagVersion = 'v'+sourceVersion;
+  return git.tag(tagVersion, 'Version: '+sourceVersion, {args: dryRun}, function (err) {
     if (err) throw err;
 
-    git.push('origin', {args: dryRun+' --tags'}, function (err) {
+    git.push('origin', tagVersion, {args: dryRun+' '}, function (err) { //--tags option to push all tags
       if (err) throw err;
     })
   });
@@ -113,7 +114,11 @@ gulp.task('branchVersion', ['tagVersion'], function() {
   });
 });
 
+/*
 gulp.task('release', ['branchVersion'], function() {
   bannerMessage('releasing version: '+sourceVersion);
 });
-
+*/
+gulp.task('release', ['tagVersion'], function() {
+  bannerMessage('releasing version: '+sourceVersion);
+});
