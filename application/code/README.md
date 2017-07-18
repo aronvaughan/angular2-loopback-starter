@@ -112,7 +112,7 @@ TODO: hook up latest ng-cli
 1. gulp angularGenClient
 1. cd client
 1. npm install 
-1. npm start
+1. ng serve --host localhost --port 3000
 1. navigate to http://localhost:3000/
 
 ## client functionality

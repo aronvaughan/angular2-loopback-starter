@@ -9,7 +9,7 @@
       "type": "string",
       "id": true,
       "required": false,
-      "defaultFn": "uuid4",
+      "defaultFn": "uuidv4",
       "index": true
     },
     "hidden": ["password"]

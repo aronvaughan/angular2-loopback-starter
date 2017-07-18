@@ -25,7 +25,7 @@
   <link href="assets/css/theme-style.min.css" rel="stylesheet">
 
   <!--Your custom colour override-->
-  <link href="#" id="colour-scheme" rel="stylesheet">
+  <link href="assets/css/colour-custom.css" id="colour-scheme" rel="stylesheet">
 
   <!-- Your custom override -->
   <link href="assets/css/custom-style.css" rel="stylesheet">
@@ -41,13 +41,15 @@
   <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
 
   <!-- socket io -->
-  <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <script src="http://localhost:3002/socket.io/socket.io.js"></script>
 
 
   <!--Plugin: Retina.js (high def image replacement) - @see: http://retinajs.com/-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/retina.js/1.3.0/retina.min.js"></script>
 
+
   <!-- Polyfill(s) for older browsers -->
+  <!--
   <script src="node_modules/core-js/client/shim.min.js"></script>
 
   <script src="node_modules/zone.js/dist/zone.js"></script>
@@ -57,14 +59,26 @@
   <script>
     System.import('main.js').catch(function(err){ console.error(err); });
   </script>
+  -->
 </head>
 
 <!-- ======== @Region: body ======== -->
 <body class="page page-login navbar-layout-default">
 
-<my-app>Loading AppComponent content here ...</my-app>
+   <my-app>Loading AppComponent content here ...</my-app>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+   <!-- Tether 1.1.1 via CDN, needed for Bootstrap Tooltips & Popovers -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.1.1/js/tether.min.js"></script>
+
+   <!-- Bootstrap 4.0.0-alpha.6 JS via CDN -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
 
+   <!-- JS plugins required on all pages NOTE: Additional non-required plugins are loaded ondemand as of AppStrap 2.5 -->
+
+   <!--Custom scripts mainly used to trigger libraries/plugins -->
+   <script src="assets/js/script.min.js"></script>
 </body>
 
 </html>

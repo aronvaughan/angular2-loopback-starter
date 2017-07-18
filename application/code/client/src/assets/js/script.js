@@ -7,8 +7,7 @@
 var jPM = {}, pageLoaderDone = false;
 var PLUGINS_LOCALPATH = './assets/plugins/';
 var SLIDER_REV_VERSION = '4.6';
-
-var initFunction = function () {
+jQuery(document).ready(function() {
   "use strict";
 
   // ****************************************************************
@@ -47,7 +46,7 @@ var initFunction = function () {
     var initCountTo = function() {
       $countTos.each(function() {
         var $this = $(this),
-          delay = $this.data('delay') || 0;
+        delay = $this.data('delay') || 0;
         $this.waypoint(function() {
           setTimeout(function() {
             $this.countTo({
@@ -85,9 +84,9 @@ var initFunction = function () {
     var initTyped = function() {
       $typed.each(function() {
         var $this = $(this),
-          typedStrings = $this.data('typed') || null,
-          typedSettings = $this.data('typed-settings') || {},
-          typedDelay = typedSettings.delay || 0;
+        typedStrings = $this.data('typed') || null,
+        typedSettings = $this.data('typed-settings') || {},
+        typedDelay = typedSettings.delay || 0;
         typedSettings.autoStart = false;
         typedSettings.callback = function() {
           if (typedSettings.doneClass !== '') {
@@ -310,9 +309,9 @@ var initFunction = function () {
       currentStyles = $this.attr("style") || '',
       bgImg = $this.data('bg-img');
 
-    // Must be merged in
-    currentStyles += 'background-image: url("'+ bgImg + '") !important;';
-    $this.attr("style", currentStyles).addClass('bg-img');
+      // Must be merged in
+      currentStyles += 'background-image: url("'+ bgImg + '") !important;';
+      $this.attr("style", currentStyles).addClass('bg-img');
   });
 
   // ----------------------------------------------------------------
@@ -385,9 +384,9 @@ var initFunction = function () {
   $('[data-url]').each(function() {
     var url = $(this).data('url');
     var parseStringUrl = function(url) {
-      var a = document.createElement('a');
-      a.href = url;
-      return a;
+        var a = document.createElement('a');
+        a.href = url;
+        return a;
     };
     var urlParse = parseStringUrl(url);
     $(this).addClass('clickable-element');
@@ -606,7 +605,7 @@ var initFunction = function () {
   if (modalsOnload.length > 0) {
     modalsOnload.each(function() {
       var $modal = $(this),
-        delay = $modal.data('modal-delay') || null;
+      delay = $modal.data('modal-delay') || null;
 
       // Delay modal opening
       if (delay !== null) {
@@ -1002,8 +1001,8 @@ var initFunction = function () {
         var sliderRevEl = $(this);
         var sliderRevSettingsDefaults = {
           extensions: PLUGINS_LOCALPATH + 'slider-revolution/revolution/js/extensions/',
-          responsiveLevels:[1240,1024,778,480],
-          visibilityLevels:[1240,1024,778,480],
+	  responsiveLevels:[1240,1024,778,480],
+	  visibilityLevels:[1240,1024,778,480],
           navigation: {
             arrows: {
               enable: true,
@@ -1134,8 +1133,8 @@ var initFunction = function () {
     var initIsotope = function() {
       jQuery('[data-toggle=isotope-grid]').each(function() {
         var $container = $(this),
-          options = $container.data('isotope-options'),
-          filters = $container.data('isotope-filter') || null;
+            options = $container.data('isotope-options'),
+            filters = $container.data('isotope-filter') || null;
 
         // Invoke isotope
         $container.isotope(options);
@@ -1322,30 +1321,29 @@ var initFunction = function () {
           coundownExpireText = $this.data('countdown-expire-text') || null;
 
         $this.countdown(countTo)
-          .on('update.countdown', function(event) {
-            if (countdownFormat === null) {
-              countdownFormat = '%H hrs %M mins %S secs';
-              if(event.offset.totalDays > 0) {
-                countdownFormat = '%-d day%!d ' + countdownFormat;
-              }
-              if(event.offset.weeks > 0) {
-                countdownFormat = '%-w week%!w ' + countdownFormat;
-              }
+        .on('update.countdown', function(event) {
+          if (countdownFormat === null) {
+            countdownFormat = '%H hrs %M mins %S secs';
+            if(event.offset.totalDays > 0) {
+              countdownFormat = '%-d day%!d ' + countdownFormat;
             }
-            $this.html(event.strftime(countdownFormat));
-          })
-          .on('finish.countdown', function(event) {
-            if (coundownExpireText !== coundownExpireText) {
-              $this.html(coundownExpireText);
+            if(event.offset.weeks > 0) {
+              countdownFormat = '%-w week%!w ' + countdownFormat;
             }
-            $this.addClass('countdown-don');
-          });
+          }
+          $this.html(event.strftime(countdownFormat));
+        })
+        .on('finish.countdown', function(event) {
+          if (coundownExpireText !== coundownExpireText) {
+            $this.html(coundownExpireText);
+          }
+          $this.addClass('countdown-don');
+        });
       });
     };
     jQuery().themeLoadPlugin(["https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"], [], initcountdownTimers);
   }
-
-};
+});
 
 // ****************************************************************
 // Custom jQuery extension functions
@@ -1357,11 +1355,11 @@ jQuery.fn.extend({
   // ----------------------------------------------------------------
   isPageLoaderDone: function(callback) {
     var $loader = jQuery('[data-toggle="page-loader"]'),
-      triggerCallback = function() {
-        if (callback && typeof(callback) === "function") {
-          callback();
-        }
-      };
+    triggerCallback = function() {
+      if (callback && typeof(callback) === "function") {
+        callback();
+      }
+    };
 
     if ($loader.length == 0) {
       triggerCallback();
@@ -1471,19 +1469,19 @@ jQuery.fn.extend({
 
     // Persistent menus
     $('.dropdown.dropdown-persist').on({
-      "shown.bs.dropdown": function() {
-        $(this).data('closable', false);
-      },
-      "hide.bs.dropdown": function(event) {
-        temp = $(this).data('closable');
-        $(this).data('closable', true);
-        return temp;
-      }
+        "shown.bs.dropdown": function() {
+          $(this).data('closable', false);
+        },
+        "hide.bs.dropdown": function(event) {
+          temp = $(this).data('closable');
+          $(this).data('closable', true);
+          return temp;
+        }
     });
     $('.dropdown.dropdown-persist .dropdown-menu').on({
-      "click": function(event) {
-        $(this).parent('.dropdown.dropdown-persist').data('closable', false);
-      },
+        "click": function(event) {
+          $(this).parent('.dropdown.dropdown-persist').data('closable', false);
+        },
     });
   },
 
@@ -1557,3 +1555,4 @@ jQuery.fn.extend({
     }
   }
 });
+

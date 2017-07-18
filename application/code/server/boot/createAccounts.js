@@ -47,7 +47,7 @@ module.exports = function(app) {
         console.log("creating account: ", account);
         createAccount(account, makeAdmin);
       } else {
-        console.log("account already exists: ", instance);
+        console.log("account already exists: ", instance.username);
       }
 
     });
@@ -68,9 +68,10 @@ module.exports = function(app) {
 
   var accounts = accountsWoId;
 
-  console.log("Creating test accounts....", accounts);
+  console.log("Creating test accounts....");
   for (var i = 0; i < accounts.length; i++) {
     findAccount(accounts[i], false);
+    console.log("Creating test account...."+accounts[i].username);
   }
   console.log("Test accounts created...");
 };

@@ -11,7 +11,7 @@ export class ServiceSubscriberUtility {
 
   }
 
-  subscribe(observable : Observable): Subject<any> {
+  subscribe(observable : Observable<any>): Subject<any> {
     var subject: Subject<any> = new Subject<any>();
     observable.subscribe(this.getDataClosure(subject), this.getErrorClosure(subject), this.getCompleteClosure(subject));
     return subject;

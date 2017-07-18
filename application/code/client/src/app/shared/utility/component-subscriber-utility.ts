@@ -11,7 +11,7 @@ export class ComponentSubscriberUtility {
 
   }
 
-  subscribe(observable : Observable): any {
+  subscribe(observable : Observable<any>): any {
     observable.subscribe(this.getDataClosure(), this.getErrorClosure(), this.getCompleteClosure());
   }
 

@@ -13,3 +13,7 @@ gulp.task('run', ['mongo-start'], function() {
     gulpCommon.runCommandSync('run: ', 'npm', ['start']);
 });
 
+gulp.task('start', ['run'], function() {
+  //alias for run
+});
+

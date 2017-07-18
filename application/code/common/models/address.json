@@ -9,8 +9,13 @@
       "type": "string",
       "id": true,
       "required": false,
-      "defaultFn": "uuid4",
+      "defaultFn": "uuidv4",
       "index": true
+    },
+    "type": {
+      "description": "user field to query by certain types, for instance: BILLING ADDRESS, WORK ADDRESS, HOME ADDRESS",
+      "type": "string",
+      "required": false
     },
     "line1": {
       "type": "string",
