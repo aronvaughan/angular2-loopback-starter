@@ -7,6 +7,7 @@ import { LoginComponent } from './login.component';
 import {SignupComponent} from "./signup.component";
 import {ResetPasswordRequestComponent} from "./reset-password-request.component";
 import {ResetPasswordComponent} from "./reset-password.component";
+import {StateReciprocityComponent} from "./state-reciprocity.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -16,7 +17,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'resetPasswordRequest', component: ResetPasswordRequestComponent },
-  { path: 'reset-password', component: ResetPasswordComponent }
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'stateReciprocity', component: StateReciprocityComponent }
+
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],

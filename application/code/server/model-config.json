@@ -63,5 +63,13 @@
   "Address": {
     "dataSource": "db",
     "public": true
+  },
+  "StateReciprocity": {
+    "dataSource": "db",
+    "public": true
+  },
+  "LineItemType": {
+    "dataSource": "memory",
+    "public": true
   }
 }

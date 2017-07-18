@@ -1,0 +1,27 @@
+<div id="content">
+  <div class="container">
+    <!-- Login form -->
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="thead-inverse">
+        <tr>
+          <th>#</th>
+          <th>State</th>
+          <th>Reciprocal State</th>
+          <th>Start</th>
+          <th>Stop</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of dataReceived; let i = index">
+          <th scope="row">{{i}}</th>
+          <td>{{data.stateCode}}</td>
+          <td>{{data.reciprocalStateCode}}</td>
+          <td>{{data.startDate | date }}</td>
+          <td>{{data.stopDate | date}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

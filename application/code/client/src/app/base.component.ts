@@ -15,6 +15,7 @@ export class BaseComponent {
    * @type {string}
    */
   errorMessage: string = undefined;
+  dataReceived: any = undefined;
 
   constructor(protected clientConfig: ClientConfig) {
     //initialize the generated client library for talking with our server
@@ -27,6 +28,14 @@ export class BaseComponent {
 
   setErrorMessage(message: string) : void {
     this.errorMessage = message;
+  }
+
+  getDataReceived() : any {
+    return this.dataReceived;
+  }
+
+  setDataReceived(data: any) {
+    this.dataReceived = data;
   }
 
 }

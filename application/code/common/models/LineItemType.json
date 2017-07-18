@@ -1,0 +1,35 @@
+{
+  "name": "LineItemType",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "forceId": false,
+  "TimeStamp" : false,
+  "options": {
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true,
+      "required": false,
+      "defaultFn": "uuid4",
+      "index": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "group": {
+      "type": "string",
+      "required": false
+    },
+    "canClientEnter": {
+      "type": "boolean",
+      "required": false,
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

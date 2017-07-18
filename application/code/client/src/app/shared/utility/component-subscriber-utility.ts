@@ -15,9 +15,10 @@ export class ComponentSubscriberUtility {
     observable.subscribe(this.getDataClosure(), this.getErrorClosure(), this.getCompleteClosure());
   }
 
-  getDataClosure() {
+  getDataClosure() : any {
     return data => {
       console.log(this.baseComponent.constructor.name, '!!!! got data!!!!', data);
+      this.baseComponent.setDataReceived(data);
     };
   }
 
@@ -26,14 +27,14 @@ export class ComponentSubscriberUtility {
    * updates the component error message to display the error to the user
    * @returns {(error?:any)=>undefined}
    */
-  getErrorClosure() {
+  getErrorClosure() : any {
     return error => {
       console.log(this.baseComponent.constructor.name, '!!!! got error!!!!', error);
       this.baseComponent.setErrorMessage(error.message);
     };
   }
 
-  getCompleteClosure() {
+  getCompleteClosure() : any {
     return () => {console.log(this.baseComponent.constructor.name, '!!!! got complete!!!!');};
   }
 }

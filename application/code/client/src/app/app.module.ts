@@ -28,6 +28,7 @@ import { SDKBrowserModule } from './shared/angular-client/index';
 import {SignupComponent} from "./signup.component";
 import {ResetPasswordRequestComponent} from "./reset-password-request.component";
 import {ResetPasswordComponent} from "./reset-password.component";
+import {StateReciprocityComponent} from "./state-reciprocity.component";
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import {ResetPasswordComponent} from "./reset-password.component";
                   LoginMenuComponent,
                   SignupComponent,
                   ResetPasswordRequestComponent,
-                  ResetPasswordComponent
+                  ResetPasswordComponent,
+                  StateReciprocityComponent
                 ],
   bootstrap:    [ AppComponent ]
 })
